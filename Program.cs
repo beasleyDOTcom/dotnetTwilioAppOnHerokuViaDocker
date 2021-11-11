@@ -13,7 +13,7 @@ namespace dotnetTwilioAppOnHerokuViaDocker
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).UseKestrel().UseUrls("http://0.0.0.0:" + Environment.GetEnvironmentVariable("PORT")).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
