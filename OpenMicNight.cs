@@ -7,6 +7,7 @@ namespace dotnetTwilioAppOnHerokuViaDocker
 {
     public class OpenMicNight
     {
+        public string OpenMicName { get; set; }
         public string RoomCode { get; set; }
         public List<Performance> Performances { get; set; }
         /*
