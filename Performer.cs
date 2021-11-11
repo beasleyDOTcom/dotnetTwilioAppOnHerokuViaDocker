@@ -7,7 +7,9 @@ namespace dotnetTwilioAppOnHerokuViaDocker
 {
     public class Performer
     {
-        public string phoneNumber { get; set; }
-
+        public string PhoneNumber { get; set; }
+        public string Instrument { get; set; }
+        public string PersonallyAnnouncedAs { get; set; }
+        public string Name { get; set; }
     }
 }
