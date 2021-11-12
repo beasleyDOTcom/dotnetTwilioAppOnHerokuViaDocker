@@ -1,11 +1,16 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+FROM node:latest AS node_base
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+RUN echo "NODE Version:" && node --version
+RUN echo "NPM Version:" && npm --version
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
+COPY --from=node_base . .
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
-
+COPY . .
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet ShortUrl.dll
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+COPY --from=node_base . .
 WORKDIR /src
 COPY ["dotnetTwilioAppOnHerokuViaDocker.csproj", "."]
 RUN dotnet restore "./dotnetTwilioAppOnHerokuViaDocker.csproj"
